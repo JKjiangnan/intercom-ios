@@ -1,5 +1,136 @@
 # Intercom
 
+## 3.2.12 (2017-08-10)
+
+## Bug Fixes
+
+* Fixed issue where updating the user before registering could cause problems ([#288](https://github.com/intercom/intercom-ios/issues/288)).
+
+## 3.2.11 (2017-08-04)
+
+## Bug Fixes
+
+* Fixed issue with "Tell us more" button for conversation ratings.
+
+## 3.2.10 (2017-08-04)
+
+## Bug Fixes
+
+* Fixed issues where `setUserHash` could behave incorrectly when `reset` is called (fixes [#279](https://github.com/intercom/intercom-ios/issues/279)).
+* Fixed issue where device tokens may not be deleted on `reset` if using identity verification.
+* Fixed crash that could occur when exiting and re-entering a conversation after sending an image.
+
+### Enhancements
+
+* Added native support for conversation ratings. You can read more about conversation ratings [here](https://docs.intercom.com/responding-to-users-and-visitors/see-your-team-s-progress/measure-customer-satisfaction-with-conversation-ratings).
+
+## 3.2.9 (2017-07-11)
+
+## Bug Fixes
+
+* Fixed an issue where events could be incorrectly transferred when switching users (Fixes [#276](https://github.com/intercom/intercom-ios/issues/276)).
+* Fixed an edge case where registering a user immeditately after logging an event may fail.
+
+## 3.2.8 (2017-06-30)
+
+## Bug Fixes
+
+* Fixed remaining issues that could occur when logging events at the same time as registration.
+
+## Bug Fixes
+
+## 3.2.7 (2017-06-28)
+
+## Bug Fixes
+
+* Fixed issue where `UIApplication` could be accessed from the main thread ([#271](https://github.com/intercom/intercom-ios/issues/271)).
+* Some improvements to help track the cause of [#256](https://github.com/intercom/intercom-ios/issues/265).
+* Fixed issue where logging an event immediately after registration could lead to the registration failing.
+* Fixed `-[CALayer renderInContext:]` crash.
+
+## 3.2.6 (2017-06-15)
+
+### Bug Fixes
+
+* Bug fixes & improvements.
+
+## 3.2.5 (2017-05-25)
+
+### Bug Fixes
+
+* Fixed Bitcode issue for manual and Carthage installs ([#260](https://github.com/intercom/intercom-ios/issues/260)).
+
+## 3.2.4 (2017-05-23)
+
+### Bug Fixes
+
+* Prevented Intercom's rootViewController from being set directly. Fixed [#256](https://github.com/intercom/intercom-ios/issues/256)
+* Fixed a bug where setting `barStyle` on `[UINavigationBar appearance]` would cause custom app colours to spill over into Intercom's navigation search bar.
+* Fixed a bug where setting the `language_override` was not working for Chinese locales.
+* Fixed a bug where Chinese and Portguese locales were defaulting back to English.
+
+
+## 3.2.3 (2017-05-22)
+
+### Bug Fixes
+
+* Bug fixes & improvements.
+
+## 3.2.2 (2017-05-10)
+
+### Bug Fixes
+
+* Fixed issue where updating bottom padding using `+[Intercom setBottomPadding:]` would not immediately take effect.
+
+## 3.2.1 (2017-05-02)
+
+### Bug Fixes
+
+* Fix NSNotificationCenter deadlock  [#252](https://github.com/intercom/intercom-ios/issues/252).
+* Added missing translations.
+
+## 3.2.0 (2017-04-21)
+
+### Bug Fixes
+
+* Fixed an issue with unread conversations not appearing if the message was received while the app was backgrounded and reopened in under a minute.
+* Fixed an issue with setting the bottom padding so that in-apps will overlap with the nav bar causing a rendering issue.
+
+### Enhancements
+
+* Added a new method to the public API `+[Intercom setUserHash:]` to support Identity Verification with Intercom. This method deprecates the Secure Mode method `+[Intercom setHMAC:data:]`
+
+## 3.1.5 (2017-04-14)
+
+### Bug Fixes
+
+* Fixed retain cycle which could cause [#248](https://github.com/intercom/intercom-ios/issues/248).
+* Fixed translation for multiple snippets.
+* Fixed an issue where real time may not work when moving from an unidentified to an identified user.
+
+## 3.1.4 (2017-04-05)
+
+### Bug Fixes
+
+* Fixed an issue where layout could be broken for apps displayed in a right to left mode.
+
+## 3.1.3 (2017-03-29)
+
+### Bug Fixes
+
+* Fixed send button issue described in [#243](https://github.com/intercom/intercom-ios/issues/243).
+
+## 3.1.2 (2017-03-15)
+
+### Bug Fixes
+
+* Add `languageOverride` to `ICMUserAttributes` (Fixes [#239](https://github.com/intercom/intercom-ios/issues/239).
+
+### Enhancements
+
+* Add API to allow integrating Intercom push notifications manually without swizzling.
+* Improved reliability of opening push notifications when using the exisiting automatic mode. 
+
 ## 3.1.1 (2017-03-01)
 
 * Added more detailed logs in cases where the Messenger cannot open due to an error.

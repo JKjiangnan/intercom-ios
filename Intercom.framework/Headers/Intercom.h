@@ -1,6 +1,6 @@
 //
 //  Intercom.h
-//  Intercom for iOS - Version 3.1.1
+//  Intercom for iOS
 //
 //  Created by Intercom on 8/01/2015.
 //  Copyright (c) 2014 Intercom. All rights reserved.
@@ -11,7 +11,7 @@
 #import "ICMUserAttributes.h"
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
-#error This version (3.1.1) of Intercom for iOS supports iOS 8.0 upwards.
+#error This version of Intercom for iOS supports iOS 8.0 upwards.
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -93,19 +93,23 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
 + (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
 
 //=========================================================================================================
-/*! @name Using secure mode */
+/*! @name Using Identity Verification */
 //=========================================================================================================
 /*!
- Secure Mode helps to make sure that conversations between you and your users are kept private, and that one
- user can't impersonate another. In Secure Mode Intercom for iOS will sign all requests going to the Intercom servers
- with tokens. It requires your mobile application to have its own server which authenticates the app's users,
- and which can store a secret. More information on secure mode can be found [here](http://docs.intercom.io/Install-on-your-mobile-product/enabling-secure-mode-in-intercom-for-ios )
-
+ Identity Verification helps to make sure that conversations between you and your users are kept private, and that one
+ user can't impersonate another. If Identity Verification is enabled for your app Intercom for iOS will sign all requests
+ going to the Intercom servers with tokens. It requires your mobile application to have its own server which authenticates the app's users,
+ and which can store a secret. More information on Identity VerificationIdentity Verification can be found [here](https://docs.intercom.com/configure-intercom-for-your-product-or-site/staying-secure/enable-identity-verification-in-intercom-for-ios )
+ 
  @note This should be called before any user registration takes place.
- @param hmac A HMAC digest of data.
- @param data A piece of user data.
+ @param userHash A HMAC digest of the user ID or email.
  */
-+ (void)setHMAC:(NSString *)hmac data:(NSString *)data;
++ (void)setUserHash:(NSString *)userHash;
+
+/*!
+ @deprecated +[Intercom setHMAC:data:] is deprecated. Use +[Intercom setUserHash:] instead.
+ */
++ (void)setHMAC:(NSString *)hmac data:(NSString *)data __attribute((deprecated("'+[Intercom setHMAC:data:]' is deprecated. Use '+[Intercom setUserHash:]' instead.")));
 
 //=========================================================================================================
 /*! @name Working with anonymous users */
@@ -252,6 +256,23 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
  @param deviceToken The device token provided in the `didRegisterForRemoteNotificationsWithDeviceToken` method.
  */
 + (void)setDeviceToken:(NSData *)deviceToken;
+
+/*!
+ Use this method to check if a push notification payload was sent by Intercom. Typically you should call
+ +[Intercom handleIntercomPushNotification:] after checking this.
+ 
+ @note This is only needed if you have set `IntercomAutoIntegratePushNotifications` to NO in your Info.plist
+ @return YES if the payload is an Intercom push notification, NO otherwise.
+ */
++ (BOOL)isIntercomPushNotification:(NSDictionary *)userInfo;
+
+/*!
+ Use this method to handle a push notification payload received by Intercom. You should first check if this
+ notification was send by Intercom with `+[Intercom isIntercomPushNotification:]`.
+ 
+ @note This is only needed if you have set `IntercomAutoIntegratePushNotifications` to NO in your Info.plist
+ */
++ (void)handleIntercomPushNotification:(NSDictionary *)userInfo;
 
 //=========================================================================================================
 /*! @name Incoming message presentation options */
